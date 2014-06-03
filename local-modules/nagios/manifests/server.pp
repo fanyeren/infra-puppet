@@ -100,16 +100,16 @@ class nagios::server {
 
     # This file is dropped onto the host directly as it
     # contains the API key
-    "${nagios_cfg_dir}/pagerduty_nagios.cfg" :
-      ensure => present,
-      require => [
-            Class["nagios::server::packages"],
-      ],
-      notify => Service["nagios"],
-      source => [
-            "puppet:///modules/nagios/pagerduty_nagios.cfg",
-            "puppet:///modules/nagios/pagerduty_nagios.cfg.dummy",
-          ];
+    #"${nagios_cfg_dir}/pagerduty_nagios.cfg" :
+    #  ensure => present,
+    #  require => [
+    #        Class["nagios::server::packages"],
+    #  ],
+    #  notify => Service["nagios"],
+    #  source => [
+    #        "puppet:///modules/nagios/pagerduty_nagios.cfg",
+    #        "puppet:///modules/nagios/pagerduty_nagios.cfg.dummy",
+    #      ];
   }
 
   cron {
