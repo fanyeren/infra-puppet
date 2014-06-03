@@ -287,6 +287,7 @@ class nagios::server {
       contact_groups    => "core-admins",
       service_description => "Bandwidth utilization",
       check_command     => "check_vnstat_by_ssh!${warn}!${crit}",  # Unit is GiB
+      check_interval => 60,  # check every hour
       host_name       => "${name}.jenkins-ci.org",
       use         => "generic-service",
     }
