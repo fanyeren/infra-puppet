@@ -6,6 +6,7 @@ node default {
     include haproxy
     include apache2
     include jenkins-ci_org
+    include ci_jenkins-ci_org
     include updates_jenkins-ci_org
 
     include exim4-config::selfrouting
