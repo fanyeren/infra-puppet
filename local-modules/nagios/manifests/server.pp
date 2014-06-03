@@ -275,7 +275,7 @@ class nagios::server {
     }
   }
 
-  define check-vnstat($ensure = present, $warn=150, $crit=200) {
+  define check-vnstat($ensure = present, $warn=110, $crit=150) {
     nagios_service {
       "bandwidth $name" :
       target        => "${nagios::server::jenkins_cfg_dir}/${name}_vnstat.cfg",
