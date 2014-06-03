@@ -45,5 +45,19 @@ class nagios::client {
         "nagios-plugins-extra" :
             ensure  => installed;
     }
+
+    # install vnstat to track network interface utilization
+    package {
+        "vnstat" :
+            ensure => installed;
+    }
+
+    file {
+        "/usr/local/bin/check_vnstat.sh":
+            owner   => root,
+            group   => root,
+            mode    => 0755,
+            source  => "puppet:///modules/nagios/vnstat/check_vnstat.sh",
+    }
 }
 # vim: shiftwidth=4 expandtab tabstop=4

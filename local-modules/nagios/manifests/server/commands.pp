@@ -48,4 +48,18 @@ class nagios::server::commands {
       ensure       => present,
       command_line => $mirrorbrain_file;
   }
+
+  # bandwidth utilization check
+  ##############################################################################
+  nagios_command {
+    "check_vnstat_by_ssh" :
+      target       => "${nagios::server::jenkins_cfg_dir}/check_vnstat_by_ssh.cfg",
+      require      => File["${nagios::server::jenkins_cfg_dir}"],
+      notify       => [
+        Service["nagios"],
+        Class["nagios::server::permissions"],
+      ],
+      ensure       => present,
+      command_line => '$USER1$/check_by_ssh -H $HOSTADDRESS$ -C "/usr/local/bin/check_vnstat.sh $ARG1$ $ARG2$"';
+  }
 }

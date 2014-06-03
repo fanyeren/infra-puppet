@@ -274,6 +274,23 @@ class nagios::server {
         use         => "generic-service",
     }
   }
+
+  define check-vnstat($ensure = present, $warn=150, $crit=200) {
+    nagios_service {
+      "bandwidth $name" :
+      target        => "${nagios::server::jenkins_cfg_dir}/${name}_vnstat.cfg",
+      notify     => [
+        Service["nagios"],
+        Class['nagios::server::permissions']
+      ],
+      ensure        => $ensure,
+      contact_groups    => "core-admins",
+      service_description => "Bandwidth utilization",
+      check_command     => "check_vnstat_by_ssh!${warn}!${crit}",  # Unit is GiB
+      host_name       => "${name}.jenkins-ci.org",
+      use         => "generic-service",
+    }
+  }
 }
 
 # vim: shiftwidth=2 expandtab tabstop=2

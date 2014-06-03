@@ -40,5 +40,10 @@ class nagios::server::checks() {
       ;
   }
 
+  nagios::server::check-vnstat {
+    "cucumber" :
+      ;
+  }
+
 }
 # vim: shiftwidth=2 expandtab tabstop=2
