@@ -16,8 +16,10 @@ yesterday=$(vnstat --dumpdb | grep '^d;1;')
 rx=$(echo $yesterday | cut -f4 -d\;)
 tx=$(echo $yesterday | cut -f5 -d\;)
 
-# total transfer in GiB
-total=$(( ($tx+$rx)/1024 ))
+# convert to GiB and compute total
+rx=$(( $rx/1024 ))
+tx=$(( $tx/1024 ))
+total=$(( $tx+$rx ))
 
 status="rx:${rx}GiB tx:${tx}GiB total:${total}GiB | rx=${rx},tx=${tx},total=${total}"
 
