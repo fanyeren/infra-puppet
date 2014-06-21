@@ -2,7 +2,7 @@
 # and fcgid to run PHP. Primarily for cucumber
 #
 # developed based on http://ubuntuforums.org/showthread.php?t=1038416
-define apache2::worker_fastcgi {
+class apache2::worker {
   include apache2
 
   package { ['apache2-mpm-worker','libapache2-mod-fcgid'] :
@@ -17,7 +17,7 @@ define apache2::worker_fastcgi {
   }
 
   package { ['php5-cgi','php5-cli']:
-    ;
+    ensure => installed,
   }
 
   file {
@@ -26,3 +26,4 @@ define apache2::worker_fastcgi {
       source  => 'puppet:///modules/apache2/fastcgi.conf';
   }
 }
+

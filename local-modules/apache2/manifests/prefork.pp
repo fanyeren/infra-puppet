@@ -2,7 +2,7 @@
 #
 # mutually exclusive with worker.pp. developed in case we need to
 # back out worker
-define apache2::worker_fastcgi {
+class apache2::prefork {
   include apache2
 
   package { ['apache2-mpm-worker','libapache2-mod-fcgid'] :
@@ -22,3 +22,4 @@ define apache2::worker_fastcgi {
       ;
   }
 }
+
