@@ -4,9 +4,14 @@ class apache2 {
   }
   else {
     package {
-      "apache2" :
-        alias => "apache2",
-        ensure  => installed;
+      'apache2' :
+        alias => 'apache2-mpm-worker',
+        ensure  => installed,
+    }
+
+    package {
+      'apache2-mpm-prefork' :
+        ensure => absent,
     }
 
     service {
