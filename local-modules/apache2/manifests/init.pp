@@ -16,5 +16,11 @@ class apache2 {
         hasrestart    => true,
         enable  => true;
     }
+
+    file {
+      '/etc/apache2/conf.d/00-no-sslv3.conf' :
+      ensure  => present,
+      source  => 'puppet:///modules/apache2/no-sslv3.conf';
+    }
   }
 }
