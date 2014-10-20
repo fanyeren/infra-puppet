@@ -1,0 +1,67 @@
+<html>
+<!--
+  This file generated from index.erb. Edit that file and do
+
+    erb < index.erb > index.html
+-->
+<head>
+  <title>Jenkins mirrors</title>
+  <style>
+      #binaries {
+          border: 1px solid #ccc;
+      }
+      #binaries TD, #binaries TH {
+          padding: 0.2em;
+          border: 1px solid #ccc;
+      }
+  </style>
+</head>
+<body>
+<%
+   types = [
+           { :name => "debian",    :description => "Debian packages" },
+           { :name => "osx",       :description => "OS X installers" },
+           { :name => "opensuse",  :description => "OpenSUSE rpms" },
+           { :name => "redhat",    :description => "RedHat rpms" },
+           { :name => "war",       :description => "War file" },
+           { :name => "windows",   :description => "Windows installer" },
+           # { :name => "solaris",   :description => "Solaris IPS Package", :href => "http://ips.jenkins-ci.org/ips" }
+   ]
+
+   lines = [
+           { :name => "",          :description => "Releases" },
+           { :name => "-stable",   :description => "LTS Releases" },
+           { :name => "-rc",       :description => "Release Candidates" },
+           { :name => "-stable-rc",:description => "LTS Release Candidates" }
+   ]
+%>
+<h1>Binaries</h1>
+<table id=binaries>
+  <tr>
+    <th></th>
+    <% types.each { |t| %>
+        <th><%=t[:name] %></th>
+    <% } %>
+  </tr>
+  <% lines.each { |l| %>
+      <tr>
+        <th><%=l[:description]%></th>
+        <% types.each { |t|  name=t[:name]+l[:name]
+        href = t[:href] != nil ? t[:href]+l[:name] : name
+        %>
+            <td><a href="<%=href %>/">
+              <%=name %>
+            </a></td>
+        <% } %>
+      </tr>
+  <% } %>
+</table>
+
+<ul>
+  <li><a href=plugins>Plugins</a>
+  <li><a href=art>Artwork</a>
+  <li><a href=updates>Update Center</a>
+  <li><a href=status.html>Mirror status</a>
+</ul>
+</body>
+</html>

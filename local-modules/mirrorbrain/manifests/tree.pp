@@ -10,13 +10,22 @@ class mirrorbrain::tree {
         #    ensure => directory;
 
 
-        '/srv/releases/jenkins/index.html' :
+        '/srv/releases/jenkins/index.erb' :
             ensure  => present,
-            source  => 'puppet:///modules/mirrorbrain/index.html',
-            require => File['/srv/releases/jenkins'];
+            source  => 'puppet:///modules/mirrorbrain/index.erb',
+            notify  => Exec['generate-index']
+            ;
         '/srv/releases/populate-fallback.sh':
             ensure  => present,
             mode    => 755,
             source  => 'puppet:///modules/mirrorbrain/populate-fallback.sh';
+    }
+
+    exec {
+        'generate-index' :
+            refreshonly => true,
+            require     => File['/srv/releases/jenkins/index.erb'],
+            command     => '/usr/bin/erb < index.erb > index.html',
+            cwd         => '/srv/releases/jenkins'
     }
 }
