@@ -28,7 +28,8 @@ class mirrorbrain::files {
 
     apache2::virtualhost {
         'mirrors.jenkins-ci.org' :
-            source => 'puppet:///modules/mirrorbrain/virtualhost.conf';
+            source  => 'puppet:///modules/mirrorbrain/virtualhost.conf',
+            wwwroot => '/srv/releases/jenkins';
     }
 }
 # vim: shiftwidth=2 expandtab tabstop=2

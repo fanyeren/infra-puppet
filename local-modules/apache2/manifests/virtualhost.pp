@@ -1,4 +1,4 @@
-define apache2::virtualhost($source=undef, $content=undef) {
+define apache2::virtualhost($source=undef, $content=undef, $wwwroot=directory) {
   include apache2::functions
 
   file { "/etc/apache2/sites-available/${name}":
@@ -22,7 +22,7 @@ define apache2::virtualhost($source=undef, $content=undef) {
       owner   => root,
       mode    => '0700';
     "/var/www/${name}" :
-      ensure  => directory,
+      ensure  => $wwwroot,
       owner   => 'www-data',
       group   => 'www-data',
       mode    => '0755';
