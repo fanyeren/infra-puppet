@@ -15,7 +15,7 @@ class mirrorbrain::tree {
             require => File['/srv/releases/jenkins'];
         '/srv/releases/populate-fallback.sh':
             ensure  => present,
-            mod     => 755,
+            mode    => 755,
             source  => 'puppet:///modules/mirrorbrain/populate-fallback.sh';
     }
 }
