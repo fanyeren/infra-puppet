@@ -13,9 +13,6 @@ node default {
 
     include jenkins-dns::server
 
-    # Temporarily disable
-    #include mirrorbrain
-
     firewall {
       '100 accept inbound HTTP requests' :
         proto  => 'tcp',
