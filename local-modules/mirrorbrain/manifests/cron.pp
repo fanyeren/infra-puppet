@@ -1,31 +1,36 @@
 class mirrorbrain::cron {
     cron {
-        'mirrorprobe' :
-            ensure  => present,
-            command => 'mirrorprobe',
-            user    => root,
+        'ping the mirrors' :
+            command => '/usr/bin/mirrorprobe',
             minute  => 30;
 
-        'mb scan' :
-            ensure  => present,
-            command => 'mb scan --quiet --jobs 4 --al',
-            user    => root,
-            minute  => 45;
+        'scan the mirrors' :
+            command => '/usr/bin/mb scan --quiet --jobs 2 --all',
+            minute  => '*/30';
 
-        'mb vacuum' :
-            ensure  => present,
-            command => 'mb db vacuum',
-            user    => root,
-            minute  => 30,
+        'cleanup the mirror db' :
+            command => '/usr/bin/mb db vacuum',
             hour    => 1,
-            weekday => Monday;
+            minute  => 30,
+            weekday => 'Monday';
 
-        'geoip-lite-update' :
-            ensure  => present,
-            command => 'geoip-lite-update',
-            user    => root,
-            minute  => 45,
+        'update the Geo IP database' :
+            command => '/usr/bin/geoip-lite-update',
             hour    => 4,
-            weekday => Tuesday;
+            minute  => 50,
+            weekday => 'Monday';
+
+        'update the time for mirror sync checks' :
+            command => '/root/update_mirror_time.sh',
+            minute  => 0;
+
+      # Make sure we're using the latest mirror list before we update mirmon
+        'update the mirmon mirror list' :
+            command => '/usr/bin/mb export --format=mirmon > /srv/releases/mirror_list',
+            minute => 40;
+
+        'update mirmon status page' :
+            command => '/usr/bin/mirmon -q -get update -c /etc/mirmon.conf',
+            minute  => 45;
     }
 }
