@@ -17,12 +17,5 @@ class mirrorbrain::tree {
             ensure  => present,
             mod     => 755,
             source  => 'puppet:///modules/mirrorbrain/populate-fallback.sh';
-
-
-        '/var/log/apache2' :
-            ensure  => directory;
-        '/var/log/apache2/mirrors.jenkins-ci.org' :
-            ensure  => directory,
-            require => File['/var/log/apache2'];
     }
 }
