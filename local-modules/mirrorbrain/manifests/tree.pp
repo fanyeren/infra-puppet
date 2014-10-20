@@ -5,8 +5,9 @@ class mirrorbrain::tree {
             ensure => directory;
         '/srv/releases' :
             ensure => directory;
-        '/srv/releases/jenkins' :
-            ensure => directory;
+        # Currently a symlink on cucumber to /srv/releases/hudson. Can't force this to be a directory
+        # '/srv/releases/jenkins' :
+        #    ensure => directory;
 
 
         '/srv/releases/jenkins/index.html' :
