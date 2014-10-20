@@ -16,7 +16,7 @@ class mirrorbrain::ubuntu {
                     Class['mirrorbrain::cron']
 
 
-    enable-apache-mod {
+    apache2::module {
         'mirrorbrain':
             name    => 'mirrorbrain',
             require => Class['mirrorbrain::packages'];
