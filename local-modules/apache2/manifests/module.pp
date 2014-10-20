@@ -15,8 +15,8 @@ define apache2::module {
                Package["apache2"],
                File[$available_file_path],
              ],
-      unless => "test -f ${enabled_file_path}",
-      command => "a2enmod ${name}",
+      unless => "/usr/bin/test -f ${enabled_file_path}",
+      command => "/usr/sbin/a2enmod ${name}",
       notify => Exec["reload-apache2"];
   }
 }
