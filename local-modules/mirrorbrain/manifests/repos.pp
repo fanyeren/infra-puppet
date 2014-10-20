@@ -1,8 +1,5 @@
 class mirrorbrain::repos {
     file {
-        '/etc/apt/sources.list.d' :
-            ensure => directory;
-
         '/etc/apt/sources.list.d/mirrorbrain.list' :
             ensure => present,
             notify => [
