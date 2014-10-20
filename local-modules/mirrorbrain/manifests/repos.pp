@@ -23,7 +23,7 @@ class mirrorbrain::repos {
             require     => [
                         File['/etc/apt/sources.list.d/mirrorbrain.list'],
                         Exec['install-key']],
-            command     => 'apt-get update';
+            command     => '/usr/bin/apt-get update';
 
         'install-key' :
             notify  => Exec['refresh-apt'],
