@@ -30,6 +30,11 @@ node default {
       'copy jira logs from eggplant to save space' :
         command => 'cd /var/log/apache2/issues.jenkins-ci.org && ./pull.sh',
         minute  => 10;
+
+      'restart slapd daily to pick up SSL certificate change automatically (INFRA-240)' :
+        command => '/etc/init.d/slapd restart',
+        hour    => 20;
+        minute  => 0;
     }
 
     package {
