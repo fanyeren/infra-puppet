@@ -33,7 +33,7 @@ node default {
 
       'restart slapd daily to pick up SSL certificate change automatically (INFRA-240)' :
         command => '/etc/init.d/slapd restart',
-        hour    => 20;
+        hour    => 20,
         minute  => 0;
     }
 
