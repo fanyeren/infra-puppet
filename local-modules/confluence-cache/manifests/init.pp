@@ -5,6 +5,11 @@ class confluence-cache {
   include nginx
   include apache2
 
+  apache2::module {
+    'disk_cache':
+      ;
+  }
+
   # to co-exist with others, incoming HTTP requests hit Apache first
   apache2::virtualhost {
     'wiki.jenkins-ci.org' :
