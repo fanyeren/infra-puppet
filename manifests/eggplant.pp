@@ -8,6 +8,7 @@ node default {
     include jira
     include confluence
     include confluence-cache
+    include eggplant
 
     include exim4-config::osuoslrelay
     exim4-config::dkim {'eggplant': ; }
