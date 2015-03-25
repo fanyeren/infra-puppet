@@ -3,6 +3,7 @@
 #
 class eggplant {
   include apache2
+  include ssl-cert
 
   # apache configuration file
   file {
