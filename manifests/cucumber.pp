@@ -9,6 +9,7 @@ node default {
     include ci_jenkins-ci_org
     include updates_jenkins-ci_org
     include mirrorbrain
+    include ldap
 
     include exim4-config::selfrouting
     exim4-config::dkim {'cucumber': ; }
