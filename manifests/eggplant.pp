@@ -7,7 +7,6 @@ node default {
     include atlassian
     include jira
     include confluence
-    include confluence-cache
     include eggplant
 
     include exim4-config::osuoslrelay
