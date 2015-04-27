@@ -9,6 +9,7 @@ node default {
     include ci_jenkins-ci_org
     include updates_jenkins-ci_org
     include mirrorbrain
+    include ldap
 
     include exim4-config::selfrouting
     exim4-config::dkim {'cucumber': ; }
@@ -30,6 +31,11 @@ node default {
       'copy jira logs from eggplant to save space' :
         command => 'cd /var/log/apache2/issues.jenkins-ci.org && ./pull.sh',
         minute  => 10;
+
+      'restart slapd daily to pick up SSL certificate change automatically (INFRA-240)' :
+        command => '/etc/init.d/slapd restart',
+        hour    => 20,
+        minute  => 0;
     }
 
     package {
@@ -86,6 +92,16 @@ node default {
       '105 accept all requests from eggplant' :
         proto  => 'tcp',
         source => 'hudson-java.osuosl.org',
+        action => 'accept';
+
+      '105 accept all requests from lettuce' :
+        proto  => 'tcp',
+        source => 'lettuce.jenkins-ci.org',
+        action => 'accept';
+
+      '105 accept all requests from edamame' :
+        proto  => 'tcp',
+        source => 'edamame.jenkins-ci.org',
         action => 'accept';
 
       '106 accept inbound LDAPS request from hosted Artifactory by JFrog' :

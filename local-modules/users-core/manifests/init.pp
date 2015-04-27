@@ -14,5 +14,6 @@ class users-core {
     include user-mindless
     include user-jieryn
     include user-aheritier
+    include user-danielbeck
     include user-commands
 }
